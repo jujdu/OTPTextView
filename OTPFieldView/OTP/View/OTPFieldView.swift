@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 public protocol OTPFieldViewProtocol {
 	var delegate: OTPFieldViewDelegate? { get set }
@@ -41,6 +40,7 @@ public final class OTPFieldView: UIView, OTPFieldViewProtocol {
 		stackView.alignment = .fill
 		stackView.distribution = .fillEqually
 		stackView.spacing = minimumSpacing
+		stackView.translatesAutoresizingMaskIntoConstraints = false
 		return stackView
 	}()
 	
@@ -149,9 +149,10 @@ public final class OTPFieldView: UIView, OTPFieldViewProtocol {
 	}
 	
 	private func setupConstraints() {
-		stackView.snp.makeConstraints { make in
-			make.edges.equalToSuperview()
-		}
+		stackView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+		stackView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+		stackView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+		stackView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
 	}
 	
 	private func setupFields() {

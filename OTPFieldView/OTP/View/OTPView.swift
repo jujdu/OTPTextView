@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SnapKit
 
 public protocol OTPViewDelegate: OTPFieldViewDelegate {}
 
@@ -17,6 +16,7 @@ final public class OTPView: UIView {
 		activityIndicatorView.hidesWhenStopped = true
 		activityIndicatorView.style = .large
 		activityIndicatorView.color = .gray
+		activityIndicatorView.translatesAutoresizingMaskIntoConstraints = false
 		return activityIndicatorView
 	}()
 	
@@ -24,6 +24,7 @@ final public class OTPView: UIView {
 		let view = OTPFieldView()
 		view.numberOfFields = 4
 		view.minimumSpacing = 8
+		view.translatesAutoresizingMaskIntoConstraints = false
 		return view
 	}()
 	
@@ -47,17 +48,15 @@ final public class OTPView: UIView {
 		addSubview(otpFieldView)
 		addSubview(activityIndicatorView)
 		
-		otpFieldView.snp.makeConstraints { make in
-			make.left.greaterThanOrEqualToSuperview()
-			make.right.lessThanOrEqualToSuperview()
-			make.center.equalToSuperview()
-			make.size.equalTo(CGSize(width: 345, height: 56))
-		}
+		otpFieldView.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor).isActive = true
+		otpFieldView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+		otpFieldView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+		otpFieldView.widthAnchor.constraint(equalToConstant: 345).isActive = true
+		otpFieldView.heightAnchor.constraint(equalToConstant: 56).isActive = true
 		
-		activityIndicatorView.snp.makeConstraints { make in
-			make.centerX.equalToSuperview()
-			make.centerY.equalToSuperview().offset(60)
-		}
+		activityIndicatorView.centerYAnchor.constraint(equalTo: centerYAnchor, constant: 60).isActive = true
+		activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+		
 	}
 	
 	public func update(state: OTPFieldView.State) {

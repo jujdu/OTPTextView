@@ -54,6 +54,7 @@ public final class OTPTextField: UITextField {
 	init(appearance: Appearance = Appearance()) {
 		self.appearance = appearance
 		super.init(frame: .zero)
+		self.translatesAutoresizingMaskIntoConstraints = false
 		setupView()
 	}
 	
